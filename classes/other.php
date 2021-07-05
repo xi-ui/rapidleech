@@ -166,9 +166,9 @@ function sec2time($time) {
 		$time -= $min * 60;
 	}
 	$sec = $time;
-	$hour = ($hour > 1) ? $hour . ' ' . lang(129) . ' ' : ($hour == 1) ? $hour . ' ' . lang(130).' ' : '';
-	$min = ($min > 1) ? $min . ' ' . lang(131) . ' ' : ($min == 1) ? $min . ' ' . lang(132).' ' : '';
-	$sec = ($sec > 1) ? $sec . ' ' . lang(133) : ($sec == 1 || $sec == 0) ? $sec . ' ' . lang(134) : '';
+	$hour = ($hour > 1) ? $hour . ' ' . lang(129) . ' ' : (($hour == 1) ? $hour . ' ' . lang(130) . ' ' : '');
+	$min = ($min > 1) ? $min . ' ' . lang(131) . ' ' : (($min == 1) ? $min . ' ' . lang(132) . ' ' : '');
+	$sec = ($sec > 1) ? $sec . ' ' . lang(133) : (($sec == 1 || $sec == 0) ? $sec . ' ' . lang(134) : '');
 	return $hour . $min . $sec;
 }
 
@@ -465,7 +465,7 @@ function jstime() {
 
 function check_referer() {
 	$refhost = !empty($_SERVER['HTTP_REFERER']) ? cut_str($_SERVER['HTTP_REFERER'], '://', '/') : false;
-	if (empty($refhost)) return;
+	if (empty($refhost) || empty($_SERVER['SERVER_ADDR'])) return;
 
 	//Remove the port.
 	$httphost = ($pos = strpos($_SERVER['HTTP_HOST'], ':')) !== false ? substr($_SERVER['HTTP_HOST'], 0, $pos) : $_SERVER['HTTP_HOST'];
